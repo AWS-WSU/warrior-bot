@@ -1,4 +1,4 @@
-# Warrior Bot
+# warrior-bot
 
 Terminal assistant for Wayne State University students.
 
