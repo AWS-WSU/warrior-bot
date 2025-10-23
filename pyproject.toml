@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "warrior-bot"
+version = "0.1.0"
+description = "Terminal assistant for Wayne State University students"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.0.0",
+]
+
+[project.scripts]
+warrior-bot = "warrior_bot.cli:main"
