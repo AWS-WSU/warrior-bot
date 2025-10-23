@@ -20,14 +20,6 @@ warrior-bot --help
 
 Python 3.10+
 
-## Structure
-
-```
-warrior_bot/
-  __init__.py
-  cli.py
-```
-
 ## Development
 
 ### Getting Started
