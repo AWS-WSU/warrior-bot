@@ -4,18 +4,6 @@ Thank you for your interest in contributing to `warrior-bot`. This project is cu
 
 This guide will steer you through the typical process of contributing to any project, as well as some specifics to `warrior-bot`.
 
-## Table of Contents
-- [Code of Conduct](#code-of-conduct)
-- [Pre-requisite Knowledge](#pre-requisite-knowledge)
-- [How to Contribute](#how-to-contribute)
-- [Setting Up Your Environment](#setting-up-your-environment)
-- [Development Workflow](#development-workflow)
-- [Style and Quality Standards](#style-and-quality-standards)
-- [Testing](#testing)
-- [Commit Messages](#commit-messages)
-- [Pull Requests](#pull-requests)
-- [Getting Help](#getting-help)
-
 # Code of Conduct
 All contributors are expected to follow our [Code of Conduct](./CODE_OF_CONDUCT.md). Keep interactions respectful and professional.
 
