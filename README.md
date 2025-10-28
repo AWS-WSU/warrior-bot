@@ -7,7 +7,7 @@ Terminal assistant for Wayne State University students.
 If you're here to contribute, skip ahead to [Getting Started](#development). If you just want to try it out, follow the steps below!
 
 ## Installation
-For now, install and run the program using the following command. We hope to come out with our pilot version in the near future which will give you access via `pip`, `uv` and `poetry`.
+For now, install and run the program using the following command from the root directory. We hope to come out with our pilot version in the near future which will give you access via `pip`, `uv` and `poetry`.
 
 ```bash
 pip install -e .
