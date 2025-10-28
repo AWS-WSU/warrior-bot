@@ -34,7 +34,7 @@ If you're on MacOS, we also recommend [iTerm2](https://iterm2.com/)
 ## Development
 
 ### Getting Started
-Read the [Contribution Setup and Guidelines](./docs/CONTRIBUTING.md) to get started.
+Read the [Contribution Setup and Guidelines](https://aws-wsu.github.io/warrior-bot/CONTRIBUTING/) to get started.
 
 #### Quick Setup
 1. Clone the repo
