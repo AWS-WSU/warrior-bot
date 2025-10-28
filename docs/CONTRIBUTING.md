@@ -4,8 +4,6 @@ Thank you for your interest in contributing to `warrior-bot`. This project is cu
 
 This guide will steer you through the typical process of contributing to any project, as well as some specifics to `warrior-bot`.
 
---- 
-
 ## Table of Contents
 - [Code of Conduct](#code-of-conduct)
 - [Pre-requisite Knowledge](#pre-requisite-knowledge)
@@ -112,9 +110,9 @@ We use a simplified GitHub Flow:
      click.echo("Hello from Warrior-Bot!")
    ```
 3. Test your changes
-  ```bash 
-  warrior-bot hello 
-  ```
+    ```bash 
+    warrior-bot hello 
+    ```
 4. Commit with a clear message:
 
    ```bash
@@ -165,8 +163,6 @@ Example:
 ```
 feat: add campus events command
 ```
-
----
 
 ## Pull Requests
 
