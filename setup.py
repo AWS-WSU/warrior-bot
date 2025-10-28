@@ -1,6 +1,6 @@
 """Setup configuration for Warrior Bot."""
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name="warrior-bot",
@@ -10,8 +10,8 @@ setup(
         "click>=8.0.0",
     ],
     entry_points={
-        'console_scripts': [
-            'warrior-bot=warrior_bot.cli:main',
+        "console_scripts": [
+            "warrior-bot=warrior_bot.cli:main",
         ],
     },
     python_requires=">=3.10",
