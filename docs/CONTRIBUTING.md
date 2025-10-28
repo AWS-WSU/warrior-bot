@@ -1,25 +1,28 @@
-# Contributing to warrior-bot
+# Contributing to `warrior-bot`
 
 Thank you for your interest in contributing to `warrior-bot`. This project is currently maintained by Stefan Barbu and supervised by Akrm Al-Hakimi.
-
----
 
 This guide will steer you through the typical process of contributing to any project, as well as some specifics to `warrior-bot`.
 
 --- 
 
-## Table of Contents 
+## Table of Contents
+- [Code of Conduct](#code-of-conduct)
+- [Pre-requisite Knowledge](#pre-requisite-knowledge)
+- [How to Contribute](#how-to-contribute)
+- [Setting Up Your Environment](#setting-up-your-environment)
+- [Development Workflow](#development-workflow)
+- [Style and Quality Standards](#style-and-quality-standards)
+- [Testing](#testing)
+- [Commit Messages](#commit-messages)
+- [Pull Requests](#pull-requests)
+- [Getting Help](#getting-help)
 
-
-## Code of Conduct
+# Code of Conduct
 All contributors are expected to follow our [Code of Conduct](./CODE_OF_CONDUCT.md). Keep interactions respectful and professional.
 
-**
-_Note_: AI is fine and in some cases encouraged but we will outright reject any low effort, clearly slop code changes. 
-Please ensure you put effort into changes made to this project, even if you used AI to help write them.
-**
-
----
+**_Note: AI is fine and in some cases encouraged but we will outright reject any low effort, clearly slop code changes. 
+Please ensure you put effort into changes made to this project, even if you used AI to help write them._**
 
 ## Pre-requisite Knowledge
 While this project is welcoming to anyone curious or eager to be involved in a given project, it is still expected to 
@@ -31,13 +34,13 @@ understand a short list of concepts/skills in order to comfortably contribute to
   - You should know how to use an IDE and when working on `warrior-bot`, you should definitely get comfortable with using the terminal.
 - Basic Git and Github knowledge 
   - You should know the following with little to no help:
-    **Git**
+    - **Git**
       - How to clone a repository 
       - How to pull, push and rebase/fetch changes from a branch 
       - How to open a new branch and push it to the repo's upstream
       - How to checkout branches
       - How to commit changes and write clean commit messages (see [Commit Messages](#commit-messages))
-    **GitHub**
+    - **GitHub**
       - How to Open a PR (Pull Request) 
       - How to link a PR or Commit to an issue (Not mandatory, but helpful)
       - How to submit an issue 
@@ -45,7 +48,6 @@ understand a short list of concepts/skills in order to comfortably contribute to
 These are skills I would probabaly expect a Sophomore/Junior to be comfortable with, but even if you aren't, it takes very little 
 discipline and time to learn them. Thus, why this project is open to developers of all experience levels.
 
----
 
 ## How to Contribute
 
@@ -60,7 +62,6 @@ Before starting work on an issue:
 2. Comment on an issue to ask if it’s available.
 3. Wait for a maintainer to confirm or assign it.
 
----
 
 ## Setting Up Your Environment
 
@@ -89,7 +90,6 @@ Before starting work on an issue:
    ```
    - You can optionally decide to manually run checks using `pre-commit run --all-files`
 
----
 
 ## Development Workflow
 
@@ -122,8 +122,6 @@ We use a simplified GitHub Flow:
    ```
 5. Push your branch and open a pull request on GitHub to `master`.
 
----
-
 ## Style and Quality Standards
 
 * Follow [PEP 8](https://peps.python.org/pep-0008/).
@@ -139,7 +137,6 @@ These checks also run automatically via GitHub Actions and pre-commit. If you wa
   flake8 warrior_bot # style checks 
 ```
 
----
 
 ## Testing
 
@@ -151,8 +148,6 @@ pytest
 
 All tests must pass before a pull request is merged. Any changes to a existing feature require that the tests still pass or new ones are made based on your changes. 
 Most new features require unit tests for any major components. 
-
----
 
 ## Commit Messages
 
@@ -184,9 +179,8 @@ Pull requests should:
 
 Maintainers will review PRs and may request changes before merging.
 
----
 
-## Getting Help
+# Getting Help
 
 If you need help:
 
