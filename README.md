@@ -1,4 +1,5 @@
 # warrior-bot
+![Lint](https://github.com/AWS-WSU/warrior-bot/actions/workflows/lint.yml/badge.svg)
 
 Terminal assistant for Wayne State University students.
 
