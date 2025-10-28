@@ -1,0 +1,34 @@
+site_name: Warrior-Bot Documentation
+site_url: https://aws-wsu.github.io/warrior-bot/
+repo_url: https://github.com/AWS-WSU/warrior-bot
+
+theme:
+  name: material
+  logo: images/wsu-logo.png
+  favicon: images/wsu-logo.png
+  features:
+    - navigation.expand
+    - navigation.sections
+    - navigation.instant
+    - content.code.copy
+    - toc.integrate
+  palette:
+    - scheme: default
+      primary: green
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: green
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+extra_css:
+  - styles/overrides.css
+
+nav:
+  - Home: index.md
+  - Contributing: CONTRIBUTING.md
