@@ -2,7 +2,11 @@
 
 Terminal assistant for Wayne State University students.
 
-## Install
+## Welcome!
+If you're here to contribute, skip ahead to [Getting Started](#development). If you just want to try it out, follow the steps below!
+
+## Installation
+For now, install and run the program using the following command. We hope to come out with our pilot version in the near future which will give you access via `pip`, `uv` and `poetry`.
 
 ```bash
 pip install -e .
@@ -17,46 +21,27 @@ warrior-bot --help
 ```
 
 ## Requirements
-
-Python 3.10+
-
+- Python 3.10+
+- Access to a terminal
+  - Recommended
+    - [Ghostty](https://ghostty.org/)
+    - [Alacritty](https://alacritty.org/)
+    - [Kitty](https://sw.kovidgoyal.net/kitty/binary/)
+    - [WezTerm](https://wezterm.org/index.html)
+   
+If you're on MacOS, we also recommend [iTerm2](https://iterm2.com/)
 ## Development
 
 ### Getting Started
+Read the [Contribution Setup and Guidelines](./docs/CONTRIBUTING.md) to get started.
 
-1. Clone the repository
-2. Create a virtual environment: `python3 -m venv venv`
-3. Activate it: `source venv/bin/activate` (or `venv\Scripts\activate` on Windows)
-4. Install in editable mode: `pip install -e .`
-5. Run: `warrior-bot <your query>`
-
-### Project Structure
-
-```
-warrior-bot/
-├── warrior_bot/           # Main package
-│   ├── __init__.py       # Package metadata
-│   └── cli.py            # CLI entry point
-├── setup.py              # Package configuration
-├── pyproject.toml        # Modern Python packaging
-├── requirements.txt      # Dependencies
-└── README.md            # This file
-```
-
-### Extending
-
-Add new modules in `warrior_bot/`:
-- Create your feature modules (e.g., `data.py`, `search.py`, etc.)
-- Import and use them in `cli.py`
-- Keep it simple and readable following best coding practices and conventions.
-
-## Submitting Changes
-
-1. Create a new branch: `git checkout -b feature/your-feature`
-2. Make your changes and commit them: `git commit -m 'Add your feature'`
-3. Push to the branch: `git push origin feature/your-feature`
-4. Open a pull request
-
-## Running Locally
-
-After installing with `pip install -e .`, any changes to the code will be reflected immediately—no reinstall needed.
+#### Quick Setup
+1. Clone the repo
+2. Setup and Activate your Virtual Environment
+3. ```bash
+   pip install pre-commit
+   pre-commit install
+   ```
+4. Create your branch, develop your bug fix, feature or other contribution
+5. Open PR and a reviewer will approve your additions or request changes/
+6. Optionally, you may run `pre-commit run --all-files` to run checks manually before pushing your changes. 
