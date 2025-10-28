@@ -1,4 +1,4 @@
-name: Lint & Format Check
+name: Lint/Format
 
 on:
   push:
