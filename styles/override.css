@@ -1,0 +1,14 @@
+:root {
+  --md-primary-fg-color: #06402B;
+  --md-primary-fg-color--light: #006241;
+  --md-primary-fg-color--dark: #06402B;
+  --md-accent-fg-color: #ffb81c;
+  --md-typeset-a-color: var(--md-accent-fg-color);
+}
+
+/* Optional: keep the sidebar permanently visible */
+@media screen and (min-width: 800px) {
+  .md-sidebar {
+    transform: translateX(0) !important;
+  }
+}
