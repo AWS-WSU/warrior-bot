@@ -1,7 +1,7 @@
 # Documentation
 Mainly for links to external libraries but also reference material. Please make sure to keep links organized as we have no idea how many libraries we will end up using.
 
-## Frontend/CLI/TUI
+## Frontend / CLI / TUI
 #### Click (Current)
 [docs](https://click.palletsprojects.com/en/stable/)
 [pypi](https://pypi.org/project/click/)
@@ -25,3 +25,9 @@ Mainly for links to external libraries but also reference material. Please make 
 [docs](https://rich.readthedocs.io/en/stable/traceback.html)
 [pypi](https://pypi.org/project/rich/)
 [github](https://github.com/Textualize/rich)
+
+## Backend / Data Collection
+[JSON Docs](https://docs.python.org/3/library/json.html)
+[sqlite3 Docs](https://docs.python.org/3/library/sqlite3.html)
+[beautifulsoup Docs](https://beautiful-soup-4.readthedocs.io/en/latest/)
+[selenium Docs](https://selenium-python.readthedocs.io/)
