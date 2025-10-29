@@ -1,19 +1,19 @@
 # Overview
 This document will serve as a centralized place to brainstorm features and improvements for the CLI (command line interface) in order to make usage for users faster, more convienent, and complete. Because we all come from different backgrounds with differing experience levels, in order to make the reader's life easier, we have included a brief glossary of acronyms below. You do **not** need to know what they all mean. This list is included to help you create an mental idea of that particular feature and to motivate you to research the subject on your own. 
-- CLI - Command Line Interface
-- RSS - Really Simple Syndication
-- API - Application Programming Interface
-- JSON - JavaScript Object Notation
-- SQL - Structured Query Language
-- XML - Extensible Markup Language (yes, the acronym is a lie \:)
-- HTTP - HyperText Transfer Protocol
-- HTTPS - HyperText Transfer Protocol Secure
+  - CLI - Command Line Interface
+  - RSS - Really Simple Syndication
+  - API - Application Programming Interface
+  - JSON - JavaScript Object Notation
+  - SQL - Structured Query Language
+  - XML - Extensible Markup Language (yes, the acronym is a lie \:)
+  - HTTP - HyperText Transfer Protocol
+  - HTTPS - HyperText Transfer Protocol Secure
 
 We encourage every reader to learn more about these topics and give in to their own curiosities. This is less of a recommendation when it comes to working on a feature that uses that particular technology. There is always something to learn. You do not need to become a master in a topic by any means, but spend about an hour reading the documentation for each technology and *truly* understanding the associated examples. This helps make sure every contributor is pulling equally for a feature. Your fellow contributors will appreciate the work you put in to actually understanding the technologies and frameworks we work with and reading the documentation. There are so many frameworks, languages, data structures, algorithms, paradigms, VCS's, etc. that in order to build a successful career as a software engineer, one must invest the time to learn and practice these technologies. You will fail often. Try often and don't hesitate to ask questions if you get completely stuck.
 
 # Ideal Feature Implementation Order
 #### 1. Base `about` & `help` Commands
-Code commands taht are crucial for a smooth user experience by providing a resource to learn.
+Code commands that are crucial for a smooth user experience by providing a resource to learn.
 #### 2. Base `where`, `what`, `whois`, `go` Commands
 Code base commands with a couple hard-coded entries for each just to prove each concept and have some examples to build the more complicated, flagged commands for later.
 #### 3. RSS Feed
