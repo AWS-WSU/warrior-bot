@@ -2,10 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://aws-wsu.github.io/warrior-bot/</loc>
-         <lastmod>2025-10-28</lastmod>
+         <lastmod>2025-10-29</lastmod>
     </url>
     <url>
          <loc>https://aws-wsu.github.io/warrior-bot/CONTRIBUTING/</loc>
-         <lastmod>2025-10-28</lastmod>
+         <lastmod>2025-10-29</lastmod>
+    </url>
+    <url>
+         <loc>https://aws-wsu.github.io/warrior-bot/documentation/</loc>
+         <lastmod>2025-10-29</lastmod>
+    </url>
+    <url>
+         <loc>https://aws-wsu.github.io/warrior-bot/overview/</loc>
+         <lastmod>2025-10-29</lastmod>
     </url>
 </urlset>
