@@ -31,4 +31,6 @@ extra_css:
 
 nav:
   - Home: index.md
+  - Overview: overview.md
   - Contributing: CONTRIBUTING.md
+  - Development: documentation.md
