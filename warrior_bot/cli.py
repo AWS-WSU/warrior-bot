@@ -1,19 +1,19 @@
-"""Command-line interface for Warrior Bot."""
+"""CLI Entry point"""
 
 import click
 
+from .core.about import about
+from .core.where import where
 
-@click.command()
-@click.argument("query", nargs=-1, required=False)
+
+@click.group()
 @click.version_option()
-def main(query):
-    """Warrior Bot - Your Wayne State University terminal assistant."""
-    if query:
-        question = " ".join(query)
-        click.echo(f"You asked: {question}")
-    else:
-        click.echo("Warrior Bot ready. Try: warrior-bot <your question>")
+def cli():
+    pass
 
+
+cli.add_command(about)
+cli.add_command(where)
 
 if __name__ == "__main__":
-    main()
+    cli()
