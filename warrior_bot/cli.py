@@ -1,7 +1,6 @@
 """CLI Entry point"""
 
 import click
-
 from core.about import about
 from core.where import where
 
