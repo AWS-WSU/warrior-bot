@@ -2,8 +2,8 @@
 
 import click
 
-from .core.about import about
-from .core.where import where
+from core.about import about
+from core.where import where
 
 
 @click.group()
