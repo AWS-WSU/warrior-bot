@@ -23,5 +23,8 @@ def cli() -> None:
 cli.add_command(about)
 cli.add_command(where)
 
+# alias to allow the naming of our entry point as cli.py
+main = cli
+
 if __name__ == "__main__":
     cli()
