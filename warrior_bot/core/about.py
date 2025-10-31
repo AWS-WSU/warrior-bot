@@ -1,43 +1,46 @@
+import textwrap
+
 import click
 
 
 @click.command(
-    epilog="See usage section at \
-    https://aws-wsu.github.io/warrior-bot/ for more."
+    epilog="See usage section at https://aws-wsu.github.io/warrior-bot/ for more."
 )
-def about():
+def about() -> None:
     """Official reference for warrior-bot"""
-    click.echo(
-        """
-        Warrior-Bot is a CLI (command line interface) that allows users\
-        to find information regarding people, location, academics, and
-        campus life at Wayne State University. Users access these through
-        commands passed to Warrior-Bot. Please see examples below for
-       recommended usage and use help ___ for specific commands or topics.
-
-        warrior-bot where panda-express
-
-              Wayne's very own Panda Express is located on the lowest\
-              floor of the Student Center near Starbucks.
-
-
-        warrior-bot whois president
-
-              Wayne State University's current interim president is\
-              Richard A. Bierschbach.
-
-
-        warrior-bot what clubs
-
-              Wayne State University offers a variety of clubs for\
-              all interest levels. Some popular ones are
-                    AWS Club
-                    Formula SAE
-                    Academic Senate
-
-
-        warrior-bot go campus-map
-
-               Opens default browser to https://maps.wayne.edu/
-    """
+    title = click.style("Warrior-Bot", fg="green", bold=True)
+    intro = (
+        f"{title} is a CLI that allows users to find information about people, "
+        "locations, academics, and campus life at Wayne State University."
     )
+
+    examples = """
+    Examples:
+
+      {cmd1}
+          Wayne's very own Panda Express is located on the lowest floor
+          of the Student Center near Starbucks.
+
+      {cmd2}
+          Wayne State University's current interim president is Richard A. Bierschbach.
+
+      {cmd3}
+          Wayne State University offers a variety of clubs for all interest levels.
+          Some popular ones are:
+            - AWS Cloud Club
+            - Formula SAE
+            - Academic Senate
+            - ...
+
+      {cmd4}
+          Opens default browser to https://maps.wayne.edu/
+    """.format(
+        cmd1=click.style("warrior-bot where panda-express", fg="cyan"),
+        cmd2=click.style("warrior-bot whois president", fg="cyan"),
+        cmd3=click.style("warrior-bot what clubs", fg="cyan"),
+        cmd4=click.style("warrior-bot go campus-map", fg="cyan"),
+    )
+
+    click.echo(textwrap.dedent(intro))
+    click.echo()
+    click.echo(textwrap.dedent(examples).strip())
