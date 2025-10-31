@@ -16,6 +16,3 @@ warrior-bot = "warrior_bot.cli:cli"
 
 [tool.black]
 line-length = 88
-
-[tool.flake8]
-max-line-length = 88

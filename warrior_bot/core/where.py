@@ -107,9 +107,7 @@ def where(loc_query):
         click.echo("Please specify a location.")
 
     query = " ".join(loc_query).lower().strip()
-    matches = difflib.get_close_matches(
-        query, LOCATIONS.keys(), n=1, cutoff=0.6
-    )
+    matches = difflib.get_close_matches(query, LOCATIONS.keys(), n=1, cutoff=0.6)
 
     if matches:
         location = matches[0]
