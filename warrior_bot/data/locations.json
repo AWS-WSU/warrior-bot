@@ -1,18 +1,18 @@
 {
   "student_center": {
     "food": {
-      "panda_express": "Student Center, lower level near Starbucks",
-      "taco_bell": "Student Center, lower level near Panda Express"
+      "panda express": "Student Center, lower level near Starbucks",
+      "taco bell": "Student Center, lower level near Panda Express"
     },
-    "midtown_market": "Student Center, first floor, walk straight ahead after entering front doors"
+    "midtown market": "Student Center, first floor, walk straight ahead after entering front doors"
   },
   "libraries": {
     "UGL": {
-      "__description": "Undergraduate Library, across from Student Center and STEM center"
-      "study_spaces": "Multiple levels with reservable rooms",
-    },
+      "description": "Undergraduate Library, across from Student Center and STEM center",
+      "study spaces": "Multiple levels with reservable rooms"
+    }
   },
   "recreation": {
-    "fitness_center": "Behind the Student Center, includes pool and gym"
+    "fitness center": "Behind the Student Center, includes pool and gym"
   }
 }

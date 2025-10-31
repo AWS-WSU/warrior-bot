@@ -5,3 +5,5 @@ mypy
 pyright
 pre-commit
 types-click
+pytest
+types-setuptools

@@ -1,5 +1,9 @@
 # warrior-bot
+![Version](https://img.shields.io/badge/version-in--development-yellow)
+<br>
 ![Lint](https://github.com/AWS-WSU/warrior-bot/actions/workflows/lint.yml/badge.svg)
+<br>
+![Test](https://github.com/AWS-WSU/warrior-bot/actions/workflows/tests.yml/badge.svg)
 
 Terminal assistant for Wayne State University students.
 

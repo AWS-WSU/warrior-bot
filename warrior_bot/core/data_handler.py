@@ -117,6 +117,17 @@ class DataHandler:
         return items
 
     def search(self, query: str) -> str | None:
-        query = query.lower().strip()
-        matches = difflib.get_close_matches(query, self.flat.keys(), n=1, cutoff=0.6)
-        return self.flat[matches[0]] if matches else None
+        query = query.lower().replace("_", " ").strip()
+        normalized = {k.lower().replace("_", " "): k for k in self.flat.keys()}
+
+        # try fuzzy match first
+        matches = difflib.get_close_matches(query, normalized.keys(), n=1, cutoff=0.4)
+        if matches:
+            return self.flat[normalized[matches[0]]]
+
+        # fallback: direct substring match
+        for nk, orig in normalized.items():
+            if query in nk:
+                return self.flat[orig]
+
+        return None
