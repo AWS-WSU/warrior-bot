@@ -16,3 +16,14 @@ warrior-bot = "warrior_bot.cli:cli"
 
 [tool.black]
 line-length = 88
+
+[tool.pyright]
+typeCheckingMode = "strict"
+reportMissingTypeStubs = "warning"
+reportOptionalSubscript = "error"
+reportOptionalMemberAccess = "error"
+
+[tool.mypy]
+strict = true
+warn_return_any = true
+warn_unused_configs = true

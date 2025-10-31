@@ -11,7 +11,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "warrior-bot=warrior_bot.cli:main",
+            "warrior-bot=warrior_bot.cli:cli",
         ],
     },
     python_requires=">=3.10",
