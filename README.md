@@ -1,4 +1,4 @@
-# warrior-bot
+# <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Wayne_State_Warriors_primary_logo.svg" width="32" height="32" style="vertical-align:middle;"/> warrior-bot
 ![Version](https://img.shields.io/badge/version-in--development-yellow)
 <br>
 ![Lint](https://github.com/AWS-WSU/warrior-bot/actions/workflows/lint.yml/badge.svg)
