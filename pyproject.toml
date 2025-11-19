@@ -13,6 +13,7 @@ dependencies = [
 
 [project.scripts]
 warrior-bot = "warrior_bot.cli:cli"
+wb="warrior_bot.cli:cli"
 
 [tool.black]
 line-length = 88

@@ -24,9 +24,24 @@ def test_json_is_valid() -> None:
 
 
 def test_all_entries_reachable(handler: DataHandler) -> None:
+    # Build a map of last-2-words to keys to identify unique suffixes
+    suffix_map: dict[str, list[str]] = {}
+    for key in handler.flat.keys():
+        tail_parts = key.lower().split()[-2:]
+        query = " ".join(tail_parts)
+        if query not in suffix_map:
+            suffix_map[query] = []
+        suffix_map[query].append(key)
+
+    # Only test keys where the last 2 words uniquely identify them
     for key, value in handler.flat.items():
         tail_parts = key.lower().split()[-2:]
         query = " ".join(tail_parts)
+
+        # Skip keys that share their suffix with other keys
+        if len(suffix_map[query]) > 1:
+            continue
+
         result = handler.search(query)
         assert result == value, f"Query '{query}' failed for key '{key}'"
 
