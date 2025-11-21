@@ -22,6 +22,7 @@ Private Methods:
 from dataclasses import dataclass
 from typing import Generator
 from urllib.request import urlopen
+from difflib import get_close_matches
 
 from bs4 import BeautifulSoup
 
@@ -29,6 +30,8 @@ from bs4 import BeautifulSoup
 class StaffExtractor:
     DIR_URL = "https://wayne.edu/people?type=people&q="  # Directory search URL
     STAFF_URL = "https://wayne.edu/people/"  # Base URL for staff profiles
+    MAX_PAGES = 5 # Amount of pages _fetch_soup_dir will look through.
+    MAX_SEARCH_OPTIONS = 50 # Given options to the user
 
     def __init__(self) -> None:
         pass
@@ -40,14 +43,31 @@ class StaffExtractor:
             query (str): The search query for the staff member.
 
         """
-        url: str = f"{self.DIR_URL}{query.replace(' ', '+')}"
-        html: str = urlopen(url).read()
-        soup: BeautifulSoup = BeautifulSoup(html, features="html.parser")
+        soup: BeautifulSoup = BeautifulSoup("", features="html.parser")
 
         # Kill all script and style elements
         for tag in soup(["script", "style"]):
             tag.extract()
 
+        i = 1
+
+        while i <= self.MAX_PAGES:
+            try:
+                page = f"&page={i}"
+                url: str = f"{self.DIR_URL}{query.replace(' ', '+')}{page}"
+                html: str = urlopen(url).read()
+                data: BeautifulSoup = BeautifulSoup(html, features="html.parser")
+
+                # Kill all script and style elements
+                for tag in soup(["script", "style"]):
+                    tag.extract()
+
+                soup.append(data)
+
+                i += 1
+            except:
+                break
+        
         return soup
 
     def _fetch_soup_staff(self, query: str) -> BeautifulSoup:
@@ -80,13 +100,14 @@ class StaffExtractor:
         parts = [p for p in name.strip().split() if p]
         return " ".join(part.capitalize() for part in parts)
 
-    def resolve_name_to_id(self, name: str) -> str | None:
+    def resolve_user_input_to_name_and_id(self, user_input: str) -> list[tuple[str, str]]:
         """
         Args:
-            name (str): The full name of the staff member to look up.
+            user_input (str): The input name of the staff member to look up.
         """
-        soup: BeautifulSoup = self._fetch_soup_dir(name)
-        tokens = set(name.lower().replace(",", "").split())
+        soup: BeautifulSoup = self._fetch_soup_dir(user_input)
+
+        staffs: list[tuple[str, str]] = []
 
         for a in soup.find_all("a", href=True):
             href = str(a["href"])
@@ -94,13 +115,36 @@ class StaffExtractor:
             if href.startswith("/people/"):
 
                 text = a.get_text(strip=True).lower().replace(",", "")
-                words = set(text.split())
 
-                if tokens.issubset(words):
-                    staff_id = href.strip("/").split("/")[-1]
-                    return staff_id
+                staff_id = href.strip("/").split("/")[-1]
+                staffs.append((text, staff_id))
+        
+        priority1: list[tuple[str, str]] = []
+        priority2: list[tuple[str, str]] = []
+        priority3: list[tuple[str, str]] = []
 
-        return None
+        query = user_input.lower().replace(",", "")
+        tokens = query.split()
+
+        names = [n for n, _ in staffs]
+
+        matches = set(get_close_matches(query, names, n=10, cutoff=0.5))
+
+        for staff_name, staff_id in staffs:
+            if len(priority1) + len(priority2) + len(priority3) >= self.MAX_SEARCH_OPTIONS:
+                break
+
+            if query in staff_name:
+                priority1.append((staff_name, staff_id))
+            elif all(any(prefix.startswith(tok) for prefix in staff_name.split())
+                for tok in tokens
+                ):
+                priority2.append((staff_name, staff_id))
+            elif staff_name in matches:
+                priority3.append((staff_name, staff_id))
+
+        # First element (Highest priority) to last element (lowest priority)
+        return priority1 + priority2 + priority3
 
     def resolve_id_to_department(self, staff_id: str) -> str | None:
         """

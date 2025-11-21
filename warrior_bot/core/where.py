@@ -26,10 +26,38 @@ def where(query: str) -> None:
         return
 
     extractor = StaffExtractor()
-    staff_id = extractor.resolve_name_to_id(text)
+    staff_lst = extractor.resolve_user_input_to_name_and_id(text)
+    selected = None
+    if len(staff_lst) > 1:
+        click.echo(click.style("Multiple matches found:", fg="yellow"))
+        for i, (staff_name, staff_id) in enumerate(staff_lst, 1):
+            click.echo(f"{i}. {extractor.normalize_name(staff_name)} ({staff_id})")
+        
+        while True:
+            choice = click.prompt(
+                "Enter a number to select a staff member, or type 'no' or enter nothing to cancel",
+                default="no"
+            ).strip().lower()
 
-    if staff_id:
-        proper = extractor.normalize_name(text)
+            if choice == "no":
+                click.echo("Search cancelled.")
+                return None
+
+            # Must be a valid number
+            if choice.isdigit():
+                idx = int(choice)
+                if 1 <= idx <= len(staff_lst):
+                    n = staff_lst[idx - 1]
+                    break
+
+            click.echo("Invalid choice, please try again.")
+    elif (len(staff_lst) > 0):
+        selected = staff_lst[0]
+
+    if selected:
+        staff_name, staff_id = selected
+
+        proper = extractor.normalize_name(staff_name)
         dep: str | None = extractor.resolve_id_to_department(staff_id)
         office: str | None = extractor.resolve_id_to_office(staff_id)
         email: str | None = extractor.resolve_id_to_email(staff_id)
