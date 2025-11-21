@@ -28,6 +28,7 @@ def where(query: str) -> None:
     extractor = StaffExtractor()
     staff_lst = extractor.resolve_user_input_to_name_and_id(text)
     selected = None
+
     if len(staff_lst) > 1:
         click.echo(click.style("Multiple matches found:", fg="yellow"))
         for i, (staff_name, staff_id) in enumerate(staff_lst, 1):
@@ -47,7 +48,7 @@ def where(query: str) -> None:
             if choice.isdigit():
                 idx = int(choice)
                 if 1 <= idx <= len(staff_lst):
-                    n = staff_lst[idx - 1]
+                    selected = staff_lst[idx - 1]
                     break
 
             click.echo("Invalid choice, please try again.")
