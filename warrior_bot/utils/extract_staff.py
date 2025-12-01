@@ -128,7 +128,7 @@ class StaffExtractor:
 
         names = [n for n, _ in staffs]
 
-        matches = set(get_close_matches(query, names, n=10, cutoff=0.5))
+        matches = set(get_close_matches(query, names, n=10, cutoff=0.75))
 
         for staff_name, staff_id in staffs:
             if len(priority1) + len(priority2) + len(priority3) >= self.MAX_SEARCH_OPTIONS:
