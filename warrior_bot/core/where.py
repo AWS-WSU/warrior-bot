@@ -11,7 +11,7 @@ import os
 import click
 
 from warrior_bot.core.data_handler import DataHandler
-from warrior_bot.utils.extract_staff import StaffExtractor
+from warrior_bot.utils.faculty_lookup import StaffLookup
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
@@ -25,38 +25,11 @@ def where(query: str) -> None:
         click.echo("Please provide a valid person or place to search for.")
         return
 
-    extractor = StaffExtractor()
+    extractor = StaffLookup()
     staff_lst = extractor.resolve_user_input_to_name_and_id(text)
-    selected = None
 
-    if len(staff_lst) > 1:
-        click.echo(click.style("Multiple matches found:", fg="yellow"))
-        for i, (staff_name, staff_id) in enumerate(staff_lst, 1):
-            click.echo(f"{i}. {extractor.normalize_name(staff_name)} ({staff_id})")
-        
-        while True:
-            choice = click.prompt(
-                "Enter a number to select a staff member, or type 'no' or enter nothing to cancel",
-                default="no"
-            ).strip().lower()
-
-            if choice == "no":
-                click.echo("Search cancelled.")
-                return None
-
-            # Must be a valid number
-            if choice.isdigit():
-                idx = int(choice)
-                if 1 <= idx <= len(staff_lst):
-                    selected = staff_lst[idx - 1]
-                    break
-
-            click.echo("Invalid choice, please try again.")
-    elif (len(staff_lst) > 0):
-        selected = staff_lst[0]
-
-    if selected:
-        staff_name, staff_id = selected
+    if staff_lst:
+        staff_name, staff_id = staff_lst[0]
 
         proper = extractor.normalize_name(staff_name)
         dep: str | None = extractor.resolve_id_to_department(staff_id)
