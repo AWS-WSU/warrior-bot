@@ -20,18 +20,18 @@ Private Methods:
 """
 
 from dataclasses import dataclass
+from difflib import get_close_matches
 from typing import Generator
 from urllib.request import urlopen
-from difflib import get_close_matches
 
 from bs4 import BeautifulSoup
 
 
-class StaffExtractor:
+class StaffLookup:
     DIR_URL = "https://wayne.edu/people?type=people&q="  # Directory search URL
     STAFF_URL = "https://wayne.edu/people/"  # Base URL for staff profiles
-    MAX_PAGES = 5 # Amount of pages _fetch_soup_dir will look through.
-    MAX_SEARCH_OPTIONS = 50 # Given options to the user
+    MAX_PAGES = 5  # Amount of pages _fetch_soup_dir will look through.
+    MAX_SEARCH_OPTIONS = 50  # Given options to the user
 
     def __init__(self) -> None:
         pass
@@ -67,7 +67,7 @@ class StaffExtractor:
                 i += 1
             except:
                 break
-        
+
         return soup
 
     def _fetch_soup_staff(self, query: str) -> BeautifulSoup:
@@ -97,54 +97,103 @@ class StaffExtractor:
 
     @staticmethod
     def normalize_name(name: str) -> str:
+        """Normalize name to 'First Last' format with proper capitalization."""
         parts = [p for p in name.strip().split() if p]
+        if len(parts) == 2:
+            parts = [parts[1], parts[0]]
         return " ".join(part.capitalize() for part in parts)
 
-    def resolve_user_input_to_name_and_id(self, user_input: str) -> list[tuple[str, str]]:
-        """
-        Args:
-            user_input (str): The input name of the staff member to look up.
-        """
-        soup: BeautifulSoup = self._fetch_soup_dir(user_input)
+    def _build_searchable_names(self, cache: list[dict[str, str | None]]) -> list[str]:
+        """Build list of searchable name strings from faculty cache.
 
-        staffs: list[tuple[str, str]] = []
+        Creates multiple variations for each name to improve fuzzy matching:
+        - "first last" (e.g., "resh mahabir")
+        - "first middle last" if middle exists (e.g., "john a smith")
+        - "last first" for reverse lookups (e.g., "mahabir resh")
+        """
+        names: list[str] = []
+        for entry in cache:
+            first = (entry.get("first") or "").lower()
+            middle = (entry.get("middle") or "").lower()
+            last = (entry.get("last") or "").lower()
+
+            if first and last:
+                names.append(f"{first} {last}")
+                names.append(f"{last} {first}")
+                if middle:
+                    names.append(f"{first} {middle} {last}")
+        return names
+
+    def _cache_entry_to_query(self, entry: dict[str, str | None]) -> str:
+        """Convert a cache entry to a search query string."""
+        first = entry.get("first") or ""
+        middle = entry.get("middle") or ""
+        last = entry.get("last") or ""
+
+        if middle:
+            return f"{first} {middle} {last}"
+        return f"{first} {last}"
+
+    def resolve_user_input_to_name_and_id(
+        self, user_input: str
+    ) -> list[tuple[str, str]]:
+        """Resolve user input to staff name and ID using cached faculty data.
+
+        Fuzzy matches user input against the local faculty cache (no HTTP request),
+        then queries the /people endpoint with the best match to get the staff ID.
+
+        Args:
+            user_input: The input name of the staff member to look up.
+
+        Returns:
+            List of (name, staff_id) tuples for the best match.
+        """
+        from warrior_bot.utils.faculty_parser import load_faculty_cache
+
+        cache = load_faculty_cache()
+        if not cache:
+            return []
+
+        query = user_input.lower().replace(",", "").strip()
+        tokens = query.split()
+        reversed_query = " ".join(reversed(tokens))
+
+        searchable_names = self._build_searchable_names(cache)
+
+        best_match: str | None = None
+        for q in [query, reversed_query]:
+            matches = get_close_matches(q, searchable_names, n=1, cutoff=0.6)
+            if matches:
+                best_match = matches[0]
+                break
+
+        if not best_match:
+            return []
+
+        match_tokens = set(best_match.split())
+        corrected_query: str | None = None
+
+        for entry in cache:
+            first = (entry.get("first") or "").lower()
+            last = (entry.get("last") or "").lower()
+
+            if first in match_tokens and last in match_tokens:
+                corrected_query = self._cache_entry_to_query(entry)
+                break
+
+        if not corrected_query:
+            return []
+
+        soup = self._fetch_soup_dir(corrected_query)
 
         for a in soup.find_all("a", href=True):
             href = str(a["href"])
-
             if href.startswith("/people/"):
-
                 text = a.get_text(strip=True).lower().replace(",", "")
-
                 staff_id = href.strip("/").split("/")[-1]
-                staffs.append((text, staff_id))
-        
-        priority1: list[tuple[str, str]] = []
-        priority2: list[tuple[str, str]] = []
-        priority3: list[tuple[str, str]] = []
+                return [(text, staff_id)]
 
-        query = user_input.lower().replace(",", "")
-        tokens = query.split()
-
-        names = [n for n, _ in staffs]
-
-        matches = set(get_close_matches(query, names, n=10, cutoff=0.75))
-
-        for staff_name, staff_id in staffs:
-            if len(priority1) + len(priority2) + len(priority3) >= self.MAX_SEARCH_OPTIONS:
-                break
-
-            if query in staff_name:
-                priority1.append((staff_name, staff_id))
-            elif all(any(prefix.startswith(tok) for prefix in staff_name.split())
-                for tok in tokens
-                ):
-                priority2.append((staff_name, staff_id))
-            elif staff_name in matches:
-                priority3.append((staff_name, staff_id))
-
-        # First element (Highest priority) to last element (lowest priority)
-        return priority1 + priority2 + priority3
+        return []
 
     def resolve_id_to_department(self, staff_id: str) -> str | None:
         """
