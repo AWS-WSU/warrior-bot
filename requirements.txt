@@ -1,3 +1,4 @@
 click
 bs4
 types-beautifulsoup4
+appdirs

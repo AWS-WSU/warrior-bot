@@ -8,9 +8,9 @@ bulletins.wayne.edu/faculty/ page into a JSON cache file.
 import json
 import os
 from dataclasses import asdict, dataclass
-from typing import cast
 from urllib.request import urlopen
 
+import appdirs
 from bs4 import BeautifulSoup
 
 BULLETIN_URL = "https://bulletins.wayne.edu/faculty/"
@@ -149,6 +149,17 @@ def build_faculty_cache(output_path: str | None = None) -> list[dict[str, str | 
     return faculty
 
 
+def get_cache_path() -> str:
+    """Get the default cache path for the faculty cache JSON file.
+
+    Returns:
+        The path to the faculty cache JSON file.
+    """
+    cache_dir: str = appdirs.user_cache_dir("warrior_bot", "warrior_bot")
+    os.makedirs(cache_dir, exist_ok=True)
+    return os.path.join(cache_dir, "faculty_cache.json")
+
+
 def load_faculty_cache(cache_path: str | None = None) -> list[dict[str, str | None]]:
     """Load faculty names from the JSON cache.
 
@@ -160,9 +171,15 @@ def load_faculty_cache(cache_path: str | None = None) -> list[dict[str, str | No
         List of faculty name dictionaries.
     """
     if cache_path is None:
-        cache_path = os.path.join(os.path.dirname(__file__), "..", "data", CACHE_FILE)
+        cache_path = get_cache_path()
 
     if not os.path.exists(cache_path):
+        package_path = os.path.join(os.path.dirname(__file__), "..", "data", CACHE_FILE)
+        if os.path.exists(package_path):
+            import shutil
+
+            shutil.copy(package_path, cache_path)
+            return load_faculty_cache(cache_path)
         return []
 
     try:
@@ -177,11 +194,3 @@ if __name__ == "__main__":
     print("Building faculty cache from bulletin...")
     results = build_faculty_cache()
     print(f"Saved {len(results)} faculty names to cache.")
-    print("\nSample entries:")
-    for entry in results[:10]:
-        name = FacultyName(
-            first=cast(str, entry.get("first")),
-            middle=entry.get("middle"),
-            last=cast(str, entry.get("last")),
-        )
-        print(f"  {name}")

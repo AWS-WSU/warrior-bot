@@ -31,7 +31,6 @@ class StaffLookup:
     DIR_URL = "https://wayne.edu/people?type=people&q="  # Directory search URL
     STAFF_URL = "https://wayne.edu/people/"  # Base URL for staff profiles
     MAX_PAGES = 5  # Amount of pages _fetch_soup_dir will look through.
-    MAX_SEARCH_OPTIONS = 50  # Given options to the user
 
     def __init__(self) -> None:
         pass
@@ -58,14 +57,13 @@ class StaffLookup:
                 html: str = urlopen(url).read()
                 data: BeautifulSoup = BeautifulSoup(html, features="html.parser")
 
-                # Kill all script and style elements
                 for tag in soup(["script", "style"]):
                     tag.extract()
 
                 soup.append(data)
 
                 i += 1
-            except:
+            except Exception:
                 break
 
         return soup
@@ -81,7 +79,6 @@ class StaffLookup:
         html: str = urlopen(url).read()
         soup: BeautifulSoup = BeautifulSoup(html, features="html.parser")
 
-        # Kill all script and style elements
         for tag in soup(["script", "style"]):
             tag.extract()
 
