@@ -6,6 +6,7 @@ import click
 
 from warrior_bot.core.about import about
 from warrior_bot.core.data_handler import JSONHandler
+from warrior_bot.core.refresh import sync
 from warrior_bot.core.where import where
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
@@ -22,6 +23,7 @@ def cli() -> None:
 
 cli.add_command(about)
 cli.add_command(where)
+cli.add_command(sync)
 
 # alias to allow the naming of our entry point as cli.py
 main = cli

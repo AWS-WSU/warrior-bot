@@ -126,7 +126,7 @@ def build_faculty_cache(output_path: str | None = None) -> list[dict[str, str | 
         List of faculty name dictionaries that were saved.
     """
     if output_path is None:
-        output_path = os.path.join(os.path.dirname(__file__), "..", "data", CACHE_FILE)
+        output_path = get_cache_path()
 
     html = fetch_bulletin_html()
     raw_names = parse_raw_names(html)
@@ -142,7 +142,6 @@ def build_faculty_cache(output_path: str | None = None) -> list[dict[str, str | 
                 seen.add(key)
                 faculty.append(asdict(parsed))
 
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w") as f:
         json.dump(faculty, f, indent=2)
 
