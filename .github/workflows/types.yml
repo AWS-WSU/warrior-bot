@@ -11,5 +11,5 @@ jobs:
         with:
           python-version: "3.13"
       - run: |
-          pip install mypy pytest types-click types-setuptools types-beautifulsoup4
+          pip install mypy pytest types-click types-setuptools types-beautifulsoup4 types-appdirs
       - run: mypy --strict .
